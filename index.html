@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d19">
+<title>SERVER KINGS | Minecraft Hosting</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+:root {
+    --bg: #080d19;
+    --panel: #101a2d;
+    --panel2: #14213a;
+    --blue: #2784ff;
+    --gold: #ffca55;
+    --green: #26e69a;
+    --red: #ff566b;
+    --text: #f3f6ff;
+    --muted: #91a2bf;
+    --border: rgba(255,255,255,.09);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at top, #14274b 0%, transparent 48%),
+        var(--bg);
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    min-height: 100vh;
+}
+
+button, input, select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(8,13,25,.94);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav {
+    max-width: 1250px;
+    margin: auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.logo {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg,#ffdf82,#db8d18);
+    color: #15100a;
+    border-radius: 14px;
+    font-size: 25px;
+    box-shadow: 0 0 24px #ffca5530;
+}
+
+.brand h1 {
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.brand small {
+    color: var(--gold);
+    display: block;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.container {
+    width: min(1150px, 94%);
+    margin: 30px auto 70px;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 42px 32px;
+    border-radius: 24px;
+    background:
+        linear-gradient(110deg,rgba(20,71,144,.7),rgba(12,24,46,.96)),
+        var(--panel);
+    border: 1px solid #4387ed36;
+    margin-bottom: 25px;
+}
+
+.hero::after {
+    content: "♛";
+    position: absolute;
+    left: 30px;
+    top: -65px;
+    font-size: 250px;
+    color: #ffffff07;
+    pointer-events: none;
+}
+
+.badge {
+    display: inline-flex;
+    padding: 5px 12px;
+    border-radius: 30px;
+    background: #2784ff20;
+    border: 1px solid #2784ff50;
+    color: #8fbcff;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.hero h2 {
+    font-size: clamp(27px,5vw,43px);
+    font-weight: 900;
+    line-height: 1.5;
+}
+
+.hero h2 span {
+    color: var(--gold);
+}
+
+.hero p {
+    color: #bdcbe2;
+    line-height: 2;
+    max-width: 580px;
+    margin-top: 9px;
+    font-size: 14px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+}
+
+.btn {
+    padding: 10px 17px;
+    border-radius: 11px;
+    font-weight: 800;
+    transition: .2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg,#3b98ff,#1761ed);
+    color: white;
+    box-shadow: 0 6px 22px #2784ff28;
+}
+
+.btn-gold {
+    background: linear-gradient(135deg,#ffe18c,#e7a62f);
+    color: #171006;
+}
+
+.btn-dark {
+    background: #ffffff0b;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-green {
+    background: #26e69a17;
+    color: var(--green);
+    border: 1px solid #26e69a44;
+}
+
+.btn-red {
+    background: #ff566b17;
+    color: #ff7888;
+    border: 1px solid #ff566b44;
+}
+
+.btn-small {
+    padding: 7px 11px;
+    font-size: 12px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 14px;
+    margin-bottom: 30px;
+}
+
+.stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 19px;
+}
+
+.stat-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.stat span {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 17px;
+}
+
+.section-head h2 {
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.section-head p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.servers {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 17px;
+}
+
+.server-card {
+    background: linear-gradient(145deg,#111d33,#0d1525);
+    border: 1px solid var(--border);
+    border-radius: 19px;
+    padding: 20px;
+    min-width: 0;
+}
+
+.server-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.server-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: #2784ff1a;
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+    flex-shrink: 0;
+}
+
+.server-title {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.server-title h3 {
+    font-size: 16px;
+    word-break: break-word;
+}
+
+.server-title p {
+    color: var(--muted);
+    font-size: 11px;
+    direction: ltr;
+    text-align: right;
+}
+
+.status {
+    font-size: 11px;
+    border-radius: 30px;
+    padding: 5px 10px;
+    white-space: nowrap;
+    background: #ffffff0b;
+    color: var(--muted);
+}
+
+.status.online {
+    color: var(--green);
+    background: #26e69a15;
+}
+
+.status.starting {
+    color: var(--gold);
+    background: #ffca5515;
+}
+
+.server-info {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 8px;
+    margin: 21px 0;
+}
+
+.info-box {
+    background: #ffffff06;
+    padding: 11px 7px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.info-box span {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.info-box strong {
+    font-size: 13px;
+}
+
+.server-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.server-actions .btn {
+    flex: 1;
+}
+
+.empty {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 45px 15px;
+    background: var(--panel);
+    border: 1px dashed #ffffff22;
+    border-radius: 17px;
+    color: var(--muted);
+}
+
+.empty div {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.feature {
+    padding: 21px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: #101a2d9c;
+}
+
+.feature .icon {
+    font-size: 27px;
+    margin-bottom: 12px;
+}
+
+.feature h3 {
+    font-size: 15px;
+    margin-bottom: 7px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 2;
+}
+
+footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 25px 15px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+footer strong {
+    color: var(--gold);
+}
+
+.modal-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: #000b;
+    backdrop-filter: blur(7px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.modal-bg.show {
+    display: flex;
+}
+
+.modal {
+    width: min(470px,100%);
+    background: #101a2d;
+    border: 1px solid #ffffff17;
+    border-radius: 21px;
+    padding: 25px;
+    max-height: 92vh;
+    overflow-y: auto;
+}
+
+.modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-head h2 {
+    font-size: 19px;
+}
+
+.close {
+    background: #ffffff10;
+    color: white;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    font-size: 19px;
+}
+
+.field {
+    margin-bottom: 15px;
+}
+
+.field label {
+    display: block;
+    font-size: 12px;
+    color: #b8c6dd;
+    margin-bottom: 7px;
+}
+
+.field input, .field select {
+    width: 100%;
+    padding: 12px;
+    background: #080f1d;
+    border: 1px solid #ffffff18;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+}
+
+.field input:focus, .field select:focus {
+    border-color: var(--blue);
+}
+
+.field select option {
+    background: #101a2d;
+}
+
+.full {
+    width: 100%;
+}
+
+.note {
+    background: #ffca5510;
+    border: 1px solid #ffca5525;
+    border-radius: 11px;
+    padding: 12px;
+    color: #d9c69c;
+    font-size: 11px;
+    line-height: 1.9;
+    margin: 14px 0;
+}
+
+.console {
+    background: #050a12;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 13px;
+    height: 190px;
+    overflow: auto;
+    direction: ltr;
+    text-align: left;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.9;
+    color: #70edb3;
+    margin-bottom: 12px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.console-input {
+    display: flex;
+    gap: 7px;
+}
+
+.console-input input {
+    flex: 1;
+    min-width: 0;
+    background: #080f1d;
+    border: 1px solid var(--border);
+    color: white;
+    padding: 10px;
+    border-radius: 9px;
+    direction: ltr;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%,20px);
+    z-index: 200;
+    background: #18253a;
+    border: 1px solid #ffffff1c;
+    padding: 12px 20px;
+    border-radius: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s;
+    width: max-content;
+    max-width: 90%;
+    font-size: 13px;
+    text-align: center;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%,0);
+}
+
+.auth-box {
+    max-width: 380px;
+    margin: 80px auto;
+    padding: 28px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+}
+
+.auth-box .logo {
+    margin: 0 auto 15px;
+}
+
+.auth-box h2 {
+    text-align: center;
+    margin-bottom: 7px;
+}
+
+.auth-box p {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 22px;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.auth-switch button {
+    background: none;
+    color: #79b4ff;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.user-label {
+    color: var(--gold);
+    font-size: 12px;
+}
+
+@media(max-width:760px) {
+    .stats {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .servers {
+        grid-template-columns: 1fr;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 28px 20px;
+    }
+
+    .hero::after {
+        font-size: 150px;
+        left: 0;
+        top: 0;
+    }
+
+    .brand h1 {
+        font-size: 15px;
+    }
+
+    .nav {
+        padding: 12px;
+    }
+
+    .nav .btn {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav class="nav">
+        <div class="brand">
+            <div class="logo">♛</div>
+            <div>
+                <h1>SERVER KINGS</h1>
+                <small>MINECRAFT HOSTING</small>
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <span id="userLabel" class="user-label hidden"></span>
+            <button id="authButton" class="btn btn-dark btn-small" onclick="showAuth()">
+                تسجيل الدخول
+            </button>
+            <button id="logoutButton" class="btn btn-dark btn-small hidden" onclick="logout()">
+                خروج
+            </button>
+        </div>
+    </nav>
+</header>
+
+<div id="authPage" class="hidden">
+    <div class="auth-box">
+        <div class="logo">♛</div>
+        <h2 id="authTitle">مرحباً بك في Server Kings</h2>
+        <p id="authDescription">سجّل الدخول للوصول إلى لوحة التحكم</p>
+
+        <form id="authForm">
+            <div id="nameField" class="field hidden">
+                <label>اسم المستخدم</label>
+                <input id="authName" maxlength="24" autocomplete="username">
+            </div>
+
+            <div class="field">
+                <label>البريد الإلكتروني</label>
+                <input id="authEmail" type="email" required autocomplete="email">
+            </div>
+
+            <div class="field">
+                <label>كلمة المرور</label>
+                <input id="authPassword" type="password" minlength="8" required autocomplete="current-password">
+            </div>
+
+            <button id="authSubmit" class="btn btn-primary full" type="submit">
+                تسجيل الدخول
+            </button>
+        </form>
+
+        <div class="auth-switch">
+            <span id="authSwitchText">ليس لديك حساب؟</span>
+            <button id="authSwitchButton" onclick="toggleAuthMode()">إنشاء حساب</button>
+        </div>
+
+        <div class="note">
+            هذه واجهة أولية. يلزم خادم خلفي آمن للمصادقة وحفظ الحسابات على الإنترنت.
+            لا تستخدم كلمات مرور حقيقية قبل إعداد المصادقة الفعلية.
+        </div>
+
+        <button class="btn btn-dark full" onclick="hideAuth()">رجوع</button>
+    </div>
+</div>
+
+<main id="mainPage" class="container">
+
+    <section class="hero">
+        <span class="badge">♛ الجيل الجديد من استضافة ماين كرافت</span>
+        <h2>اصنع عالمك.<br><span>كن ملك السيرفر.</span></h2>
+        <p>
+            أنشئ سيرفر ماين كرافت، خصّص إعداداتك،
+            وتابع إدارة عالمك من لوحة تحكم واحدة.
+        </p>
+
+        <div class="hero-actions">
+            <button class="btn btn-gold" onclick="openCreate()">
+                ＋ إنشاء سيرفر جديد
+            </button>
+            <button class="btn btn-dark" onclick="showFeatures()">
+                اكتشف المميزات ↓
+            </button>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat">
+            <div class="stat-icon">🖥️</div>
+            <strong id="serverCount">0</strong>
+            <span>سيرفراتي</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🟢</div>
+            <strong id="onlineCount">0</strong>
+            <span>سيرفرات تعمل</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">👥</div>
+            <strong>200</strong>
+            <span>حد اللاعبين لكل سيرفر</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🌍</div>
+            <strong>Java + Bedrock</strong>
+            <span>أنواع الاتصال المستهدفة</span>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-head">
+            <div>
+                <h2>🖥️ سيرفراتي</h2>
+                <p>إدارة عوالم Minecraft الخاصة بك</p>
+            </div>
+
+            <button class="btn btn-primary btn-small" onclick="openCreate()">
+                ＋ جديد
+            </button>
+        </div>
+
+        <div id="serverList" class="servers"></div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="feature">
+            <div class="icon">⚡</div>
+            <h3>تشغيل سريع</h3>
+            <p>لوحة تحكم مصممة لتسهيل إدارة السيرفر. سرعة التشغيل الفعلية تعتمد على الخادم المستضيف.</p>
+        </div>
+
+        <div class="feature">
+            <div class="icon">♾️</div>
+            <h3>تشغيل 24 ساعة</h3>
+            <p>واجهة لإدارة خيار التشغيل المستمر. تفعيله فعلياً يتطلب استضافة تسمح بالعمل دون توقف.</p>
+        </div>
+
+        <div class="feature">
+            <div class="icon">🎮</div>
+            <h3>Java وBedrock</h3>
+            <p>دعم الاتصال من Java وBedrock باستخدام إعدادات وبرمجيات متوافقة على الخادم.</p>
+        </div>
+
+        <div class="feature">
+            <div class="icon">🧩</div>
+            <h3>البلوجينات والمودات</h3>
+            <p>تجهيز واجهة لإدارة ملفات الإضافات. الرفع والتثبيت الحقيقيان يحتاجان إلى خادم خلفي.</p>
+        </div>
+
+        <div class="feature">
+            <div class="icon">🌍</div>
+            <h3>إصدارات متعددة</h3>
+            <p>إعدادات لاختيار إصدارات Minecraft، حسب توافق إصدار الخادم والبرمجيات المستخدمة.</p>
+        </div>
+
+        <div class="feature">
+            <div class="icon">🛡️</div>
+            <h3>حسابات منفصلة</h3>
+            <p>يجب ربط لوحة التحكم بمصادقة آمنة ونظام صلاحيات قبل السماح للمستخدمين بإدارة سيرفراتهم.</p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <strong>♛ SERVER KINGS</strong>
+    <p>YOUR WORLD. YOUR RULES. YOUR KINGDOM.</p>
+    <p>© 2026 Server Kings — Minecraft Hosting Project</p>
+</footer>
+
+<!-- إنشاء سيرفر -->
+<div id="createModal" class="modal-bg" onclick="backdropClose(event,'createModal')">
+    <div class="modal">
+        <div class="modal-head">
+            <h2>♛ إنشاء سيرفر جديد</h2>
+            <button class="close" onclick="closeModal('createModal')">×</button>
+        </div>
+
+        <form id="createForm">
+            <div class="field">
+                <label>اسم السيرفر</label>
+                <input id="newServerName" maxlength="30" required placeholder="مثال: Kings SMP">
+            </div>
+
+            <div class="field">
+                <label>نوع السيرفر</label>
+                <select id="newServerType">
+                    <option value="Paper">Paper — بلوجينات</option>
+                    <option value="Vanilla">Vanilla — الأصلي</option>
+                    <option value="Spigot">Spigot — بلوجينات</option>
+                    <option value="Fabric">Fabric — مودات</option>
+                    <option value="Forge">Forge — مودات</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>إصدار Minecraft</label>
+                <select id="newServerVersion">
+                    <option value="1.21.8">1.21.8</option>
+                    <option value="1.21.7">1.21.7</option>
+                    <option value="1.21.6">1.21.6</option>
+                    <option value="1.21.5">1.21.5</option>
+                    <option value="1.21.4">1.21.4</option>
+                    <option value="1.21.1">1.21.1</option>
+                    <option value="1.20.6">1.20.6</option>
+                    <option value="1.20.4">1.20.4</option>
+                    <option value="1.20.1">1.20.1</option>
+                    <option value="1.19.4">1.19.4</option>
+                    <option value="1.18.2">1.18.2</option>
+                    <option value="1.16.5">1.16.5</option>
+                    <option value="1.12.2">1.12.2</option>
+                    <option value="1.8.8">1.8.8</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>الحد الأقصى للاعبين</label>
+                <select id="newServerPlayers">
+                    <option value="10">10 لاعبين</option>
+                    <option value="20">20 لاعباً</option>
+                    <option value="50">50 لاعباً</option>
+                    <option value="100">100 لاعب</option>
+                    <option value="200">200 لاعب</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>نوع الاتصال</label>
+                <select id="newServerEdition">
+                    <option value="Java">Java Edition</option>
+                    <option value="Bedrock">Bedrock Edition</option>
+                    <option value="Both">Java + Bedrock</option>
+                </select>
+            </div>
+
+            <div class="note">
+                إنشاء بطاقة السيرفر هنا يحفظ إعداداتها محلياً في المتصفح فقط.
+                تشغيل Minecraft الحقيقي يحتاج إلى خادم خلفي متصل بلوحة التحكم.
+            </div>
+
+            <button class="btn btn-primary full" type="submit">
+                ♛ إنشاء السيرفر
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- إعدادات السيرفر -->
+<div id="settingsModal" class="modal-bg" onclick="backdropClose(event,'settingsModal')">
+    <div class="modal">
+        <div class="modal-head">
+            <h2>⚙️ إعدادات السيرفر</h2>
+            <button class="close" onclick="closeModal('settingsModal')">×</button>
+        </div>
+
+        <form id="settingsForm">
+            <input type="hidden" id="settingsServerId">
+
+            <div class="field">
+                <label>اسم السيرفر</label>
+                <input id="settingsName" maxlength="30" required>
+            </div>
+
+            <div class="field">
+                <label>عنوان السيرفر</label>
+                <input id="settingsAddress" readonly placeholder="يظهر بعد ربط الخادم الحقيقي">
+            </div>
+
+            <div class="field">
+                <label>الحد الأقصى للاعبين</label>
+                <select id="settingsPlayers">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                </select>
+            </div>
+
+            <label style="display:flex;gap:10px;align-items:center;margin:15px 0">
+                <input type="checkbox" id="settings24h">
+                <span>♾️ طلب تشغيل السيرفر 24 ساعة</span>
+            </label>
+
+            <div class="note">
+                خيار 24 ساعة هنا يحفظ تفضيلك فقط؛ لن يعمل السيرفر باستمرار حتى يتم ربط النظام باستضافة حقيقية تدعم ذلك.
+            </div>
+
+            <button class="btn btn-primary full" type="submit">حفظ الإعدادات</button>
+        </form>
+    </div>
+</div>
+
+<!-- الكونسول -->
+<div id="consoleModal" class="modal-bg" onclick="backdropClose(event,'consoleModal')">
+    <div class="modal">
+        <div class="modal-head">
+            <h2>⌨️ Console</h2>
+            <button class="close" onclick="closeModal('consoleModal')">×</button>
+        </div>
+
+        <p id="consoleServerName" style="margin-bottom:10px;color:var(--muted);font-size:12px"></p>
+
+        <div id="consoleOutput" class="console">SERVER KINGS
+واجهة الكونسول جاهزة للربط.
+لا يوجد اتصال بخادم Minecraft حالياً.</div>
+
+        <form id="consoleForm" class="console-input">
+            <input id="consoleCommand" placeholder="اكتب الأمر..." autocomplete="off">
+            <button class="btn btn-primary" type="submit">إرسال</button>
+        </form>
+
+        <div class="note">
+            الأوامر لن تصل إلى Minecraft قبل ربط الكونسول بخادم خلفي آمن.
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const STORAGE_KEY = "server_kings_demo_servers_v1";
+
+let servers = loadServers();
+let selectedConsoleServer = null;
+let authMode = "login";
+
+function loadServers() {
+    try {
+        const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        return Array.isArray(data) ? data : [];
+    } catch {
+        return [];
+    }
+}
+
+function saveServers() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(servers));
+    renderServers();
+}
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[char]);
+}
+
+function notify(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+
+function openModal(id) {
+    document.getElementById(id).classList.add("show");
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove("show");
+}
+
+function backdropClose(event, id) {
+    if (event.target.id === id) closeModal(id);
+}
+
+function showFeatures() {
+    document.getElementById("features").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function openCreate() {
+    document.getElementById("createForm").reset();
+    openModal("createModal");
+}
+
+function renderServers() {
+    const list = document.getElementById("serverList");
+
+    document.getElementById("serverCount").textContent = servers.length;
+    document.getElementById("onlineCount").textContent =
+        servers.filter(s => s.status === "online").length;
+
+    if (!servers.length) {
+        list.innerHTML = `
+            <div class="empty">
+                <div>🖥️</div>
+                <h3>لا توجد سيرفرات حتى الآن</h3>
+                <p style="margin:10px 0 18px">أنشئ أول سيرفر لك وابدأ إعداد عالمك.</p>
+                <button class="btn btn-primary" onclick="openCreate()">＋ إنشاء سيرفر</button>
+            </div>
+        `;
+        return;
+    }
+
+    list.innerHTML = servers.map(server => {
+        const status = server.status || "offline";
+
+        let statusText = "متوقف";
+        if (status === "online") statusText = "يعمل";
+        if (status === "starting") statusText = "قيد التشغيل";
+
+        return `
+        <article class="server-card">
+            <div class="server-top">
+                <div class="server-title">
+                    <div class="server-icon">⛏️</div>
+                    <div>
+                        <h3>${escapeHTML(server.name)}</h3>
+                        <p>${escapeHTML(server.type)} · ${escapeHTML(server.version)}</p>
+                    </div>
+                </div>
+                <span class="status ${status}">${statusText}</span>
+            </div>
+
+            <div class="server-info">
+                <div class="info-box">
+                    <span>👥 اللاعبون</span>
+                    <strong>0/${server.players}</strong>
+                </div>
+                <div class="info-box">
+                    <span>🎮 النسخة</span>
+                    <strong>${escapeHTML(server.edition)}</strong>
+                </div>
+                <div class="info-box">
+                    <span>♾️ 24 ساعة</span>
+                    <strong>${server.alwaysOn ? "مفعّل" : "متوقف"}</strong>
+                </div>
+            </div>
+
+            <div class="server-actions">
+                <button class="btn ${status === "online" ? "btn-red" : "btn-green"} btn-small"
+                    onclick="toggleServer('${server.id}')">
+                    ${status === "online" ? "■ إيقاف" : "▶ تشغيل"}
+                </button>
+
+                <button class="btn btn-dark btn-small"
+                    onclick="openSettings('${server.id}')">
+                    ⚙️ إعدادات
+                </button>
+
+                <button class="btn btn-dark btn-small"
+                    onclick="openConsole('${server.id}')">
+                    ⌨️ Console
+                </button>
+
+                <button class="btn btn-dark btn-small"
+                    onclick="deleteServer('${server.id}')">
+                    🗑️
+                </button>
+            </div>
+        </article>
+        `;
+    }).join("");
+}
+
+document.getElementById("createForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    if (servers.length >= 10) {
+        notify("وصلت إلى حد البطاقات التجريبية في هذه الواجهة.");
+        return;
+    }
+
+    const name = document.getElementById("newServerName").value.trim();
+
+    if (!name) {
+        notify("اكتب اسم السيرفر أولاً.");
+        return;
+    }
+
+    const server = {
+        id: crypto.randomUUID
+            ? crypto.randomUUID()
+            : String(Date.now()) + Math.random().toString(16).slice(2),
+
+        name,
+        type: document.getElementById("newServerType").value,
+        version: document.getElementById("newServerVersion").value,
+        players: Number(document.getElementById("newServerPlayers").value),
+        edition: document.getElementById("newServerEdition").value,
+        status: "offline",
+        alwaysOn: false,
+        createdAt: new Date().toISOString()
+    };
+
+    servers.push(server);
+    saveServers();
+    closeModal("createModal");
+
+    notify("تم إنشاء بطاقة السيرفر محلياً. يلزم ربط خادم حقيقي لتشغيله.");
+});
+
+function toggleServer(id) {
+    const server = servers.find(s => s.id === id);
+    if (!server) return;
+
+    notify("هذه واجهة تجريبية فقط. اربط API خادم Minecraft لتشغيل السيرفر فعلياً.");
+}
+
+function deleteServer(id) {
+    if (!confirm("هل تريد حذف بطاقة السيرفر من هذا المتصفح؟")) return;
+
+    servers = servers.filter(s => s.id !== id);
+    saveServers();
+    notify("تم حذف البطاقة المحلية.");
+}
+
+function openSettings(id) {
+    const server = servers.find(s => s.id === id);
+    if (!server) return;
+
+    document.getElementById("settingsServerId").value = server.id;
+    document.getElementById("settingsName").value = server.name;
+    document.getElementById("settingsAddress").value =
+        server.address || "غير متصل بخادم فعلي";
+    document.getElementById("settingsPlayers").value = server.players;
+    document.getElementById("settings24h").checked = !!server.alwaysOn;
+
+    openModal("settingsModal");
+}
+
+document.getElementById("settingsForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const id = document.getElementById("settingsServerId").value;
+    const server = servers.find(s => s.id === id);
+    if (!server) return;
+
+    server.name = document.getElementById("settingsName").value.trim();
+    server.players = Number(document.getElementById("settingsPlayers").value);
+    server.alwaysOn = document.getElementById("settings24h").checked;
+
+    saveServers();
+    closeModal("settingsModal");
+
+    notify("تم حفظ الإعدادات في المتصفح. التشغيل الفعلي يحتاج إلى خادم خلفي.");
+});
+
+function openConsole(id) {
+    const server = servers.find(s => s.id === id);
+    if (!server) return;
+
+    selectedConsoleServer = id;
+
+    document.getElementById("consoleServerName").textContent = server.name;
+    document.getElementById("consoleOutput").textContent =
+        "SERVER KINGS CONSOLE\n" +
+        "Server: " + server.name + "\n" +
+        "Version: " + server.version + "\n" +
+        "Status: " + server.status + "\n\n" +
+        "لا يوجد اتصال بخادم Minecraft حالياً.\n" +
+        "يجب ربط هذا القسم بالخادم الخلفي قبل تنفيذ الأوامر.";
+
+    openModal("consoleModal");
+}
+
+document.getElementById("consoleForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const input = document.getElementById("consoleCommand");
+    const command = input.value.trim();
+    if (!command) return;
+
+    const output = document.getElementById("consoleOutput");
+
+    output.textContent += "\n> " + command +
+        "\n[DEMO] لم يُرسل الأمر: لا يوجد اتصال بخادم Minecraft.";
+
+    output.scrollTop = output.scrollHeight;
+    input.value = "";
+});
+
+function showAuth() {
+    authMode = "login";
+    updateAuthMode();
+    document.getElementById("authPage").classList.remove("hidden");
+    document.getElementById("mainPage").classList.add("hidden");
+}
+
+function hideAuth() {
+    document.getElementById("authPage").classList.add("hidden");
+    document.getElementById("mainPage").classList.remove("hidden");
+}
+
+function toggleAuthMode() {
+    authMode = authMode === "login" ? "register" : "login";
+    updateAuthMode();
+}
+
+function updateAuthMode() {
+    const registering = authMode === "register";
+
+    document.getElementById("authTitle").textContent =
+        registering ? "إنشاء حساب جديد" : "مرحباً بعودتك";
+
+    document.getElementById("authDescription").textContent =
+        registering ? "أنشئ حسابك في Server Kings" : "سجّل الدخول إلى لوحة التحكم";
+
+    document.getElementById("nameField").classList.toggle("hidden", !registering);
+
+    document.getElementById("authName").required = registering;
+
+    document.getElementById("authSubmit").textContent =
+        registering ? "إنشاء حساب" : "تسجيل الدخول";
+
+    document.getElementById("authSwitchText").textContent =
+        registering ? "لديك حساب بالفعل؟" : "ليس لديك حساب؟";
+
+    document.getElementById("authSwitchButton").textContent =
+        registering ? "تسجيل الدخول" : "إنشاء حساب";
+}
+
+function logout() {
+    notify("لم يتم إعداد نظام مصادقة حقيقي بعد.");
+}
+
+document.getElementById("authForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    notify("تسجيل الدخول يحتاج إلى خادم مصادقة آمن. لا تُخزّن كلمات المرور في هذا الملف.");
+});
+
+renderServers();
+</script>
+
+</body>
+  </html>
